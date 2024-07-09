@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from . import models
+from .models import Tag,Image
+from django.http import HttpResponse
 
 # Create your views here.
 def test(request):
     # Creating tags
-    tag1 = Tag.objects.create(name='Electronics')
-    tag2 = Tag.objects.create(name='Gadgets')
+    # Attempt to get or create the object
+    tag1, created = Tag.objects.get_or_create( name='Electronics')
+    tag2, created = Tag.objects.get_or_create( name='Gadgets')
 
     # Creating an item
-    item = Image.objects.create(file_name='test_file.jpg')
+    item,created = Image.objects.get_or_create(file_name='test_file.jpg')
 
     # Adding tags to the item
     item.tags.add(tag1, tag2)
@@ -18,3 +20,5 @@ def test(request):
 
     # Accessing items of a tag
     tag_items = tag1.items.all()
+
+    return HttpResponse("ok")

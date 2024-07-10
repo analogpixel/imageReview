@@ -1,6 +1,21 @@
 from django.shortcuts import render
 from .models import Tag,Image
 from django.http import HttpResponse
+from .scanfiles import scanfiles
+
+def index(request):
+    images = Image.objects.all()
+    return render(request, 'review_app/index.html', {'images': images})
+
+# reindex all the images
+def rescan(request):
+    # add new from fs
+    for f in scanfiles("~/imageReview/sample_images"):
+        Image.objects.get_or_create(file_name=f)
+
+    # remove files in db but not fs
+
+    return HttpResponse("scanned")
 
 # Create your views here.
 def test(request):

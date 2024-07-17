@@ -14,10 +14,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
         .container {
-            width: 400px;
+            width: 450px;
         }
         .card {
             background-color: #fff;
@@ -26,12 +25,7 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .card h3 {
-            margin-top: 0;
-        }
-        .card p {
-            margin: 10px 0;
-        }
+
         .actions {
             display: flex;
             justify-content: space-between;
@@ -50,7 +44,7 @@
             background-color: #e0e0e0;
             border: none;
             padding: 10px;
-            border-radius: 50%;
+            border-radius: 10%;
             cursor: pointer;
         }
         .actions button:hover {
@@ -61,7 +55,7 @@
             color: #fff;
         }
         .card img {
-            height: 30px;
+            width: 400px;
             margin-right: 10px;
             vertical-align: middle;
         }
@@ -73,83 +67,26 @@
             font-size: 12px;
             display: inline-block;
         }
-        .icons {
-            display: flex;
-            gap: 10px;
-        }
-        .icons svg {
-            fill: #777;
-            cursor: pointer;
-        }
-        .icons svg:hover {
-            fill: #0055ff;
-        }
     </style>
+
 </head>
 <body>
     <div class="container">
       {% for value in images %}
       <div class="card">
-        hello
         <img src="/img/{{ value }}">
+        {{value}}
+        <span class="tag">blue</span>
+        <div class="icons"></div>
+        <div class="actions">
+            <div class="left-actions">
+                <button>Discard</button>
+                <button>Master</button>
+                <button>Feedback</button>
+            </div>
+        </div>
       </div>
       {% endfor %}
-
-        <div class="card">
-            <h3><img src="book_cover.png" alt="Book Cover">Get Better at Anything</h3>
-            <p><strong>Scott Young</strong></p>
-            <p>Only by escaping the vague verbiage of typical pronouncements can forecasters gain valuable feedback and calibrate future decisions.</p>
-            <span class="tag">blue</span>
-            <div class="icons">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-            </div>
-            <div class="actions">
-                <div class="left-actions">
-                    <button>Discard</button>
-                    <button>Master</button>
-                    <button>Feedback</button>
-                </div>
-                <button class="done">Done</button>
-            </div>
-        </div>
-        <div class="card">
-            <h3><img src="book_cover.png" alt="Book Cover">Make Your Own Rules</h3>
-            <p><strong>Andrew Huang</strong></p>
-            <p>Having more techniques in your toolbox multiplies the possibilities of your creative expression. You’re able to find more and better solutions to the challenges that come up as you create. You have more to draw on when things aren’t working or when you’re less inspired than usual, and with more sparks flying you’ll find yourself in far fewer ruts.</p>
-            <div class="icons">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 4.35a8 8 0 1 0 0 15.3 8 8 0 0 0 0-15.3zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-                </svg>
-            </div>
-            <div class="actions">
-                <div class="left-actions">
-                    <button>Discard</button>
-                    <button>Master</button>
-                    <button>Feedback</button>
-                </div>
-                <button class="done">Done</button>
-            </div>
-        </div>
     </div>
 </body>
 </html>

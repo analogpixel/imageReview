@@ -5,6 +5,7 @@ from django.conf import settings
 from .scanfiles import scanfiles
 import mimetypes
 import os
+import random
 
 def serve_image(request, file_name):
     image_path = os.path.join(settings.IMAGES_DIR, file_name)
@@ -16,7 +17,9 @@ def serve_image(request, file_name):
     return FileResponse(open(image_path, 'rb'), content_type=content_type)
 
 def index(request):
-    images = Image.objects.all()
+    # https://docs.djangoproject.com/en/5.0/ref/models/querysets/
+    _images = Image.objects.all().order_by("?")
+    images = _images[0:4]
     return render(request, 'review_app/index.html', {'images': images})
 
 # reindex all the images

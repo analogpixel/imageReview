@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Tag,Image
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, JsonResponse
 from django.conf import settings
 from .scanfiles import scanfiles
 import mimetypes
@@ -15,6 +15,21 @@ def serve_image(request, file_name):
         content_type = 'application/octet-stream'
 
     return FileResponse(open(image_path, 'rb'), content_type=content_type)
+
+def update_note(request, file_name):
+    if request.method == 'POST':
+        img = Image.objects.get(file_name=file_name)
+        img.notes = notes = request.POST.get('notes')
+        img.save()
+        return JsonResponse({'status': true})
+    else:
+        return JsonResponse({'status': false})
+
+def update_star(request, file_name):
+    img = Image.objects.get(file_name=file_name)
+    img.stared = not img.stared
+    img.save()
+    return JsonResponse({'status':img.stared})
 
 def index(request):
     # https://docs.djangoproject.com/en/5.0/ref/models/querysets/
@@ -32,23 +47,3 @@ def rescan(request):
 
     return HttpResponse("scanned")
 
-# Create your views here.
-def test(request):
-    # Creating tags
-    # Attempt to get or create the object
-    tag1, created = Tag.objects.get_or_create( name='Electronics')
-    tag2, created = Tag.objects.get_or_create( name='Gadgets')
-
-    # Creating an item
-    item,created = Image.objects.get_or_create(file_name='test_file.jpg')
-
-    # Adding tags to the item
-    item.tags.add(tag1, tag2)
-
-    # Accessing tags of an item
-    item_tags = item.tags.all()
-
-    # Accessing items of a tag
-    tag_items = tag1.items.all()
-
-    return HttpResponse("ok")

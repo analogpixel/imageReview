@@ -15,23 +15,16 @@
       {% for value in images %}
       <div class="card">
         <img src="/img/{{ value }}">
-        {{value}}
-        <span class="tag">blue</span>
         <div class="icons">
           <div class="star" data-filename="{{ value }}">
+            <br>
+          {{ value }}
           {% if value.stared %}
           ⭐️ 
           {% else %}
           ✩ 
           {% endif %}
           </div>
-        </div>
-        <div class="actions">
-            <div class="left-actions">
-                <button>Discard</button>
-                <button>Master</button>
-                <button>Feedback</button>
-            </div>
         </div>
         <div class="notes">
           <textarea class="noteField" data-filename="{{ value }}" placeholder="Add notes">{{ value.notes }}</textarea>

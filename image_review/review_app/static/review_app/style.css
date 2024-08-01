@@ -8,6 +8,15 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.noteField {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
 .container {
     width: 450px;
 }

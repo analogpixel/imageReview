@@ -6,6 +6,7 @@ from .scanfiles import scanfiles
 import mimetypes
 import os
 import random
+from django.views.decorators.csrf import csrf_exempt
 
 def serve_image(request, file_name):
     image_path = os.path.join(settings.IMAGES_DIR, file_name)
@@ -16,14 +17,15 @@ def serve_image(request, file_name):
 
     return FileResponse(open(image_path, 'rb'), content_type=content_type)
 
+@csrf_exempt
 def update_note(request, file_name):
     if request.method == 'POST':
         img = Image.objects.get(file_name=file_name)
-        img.notes = notes = request.POST.get('notes')
+        img.notes = notes = request.POST.get('note')
         img.save()
-        return JsonResponse({'status': true})
+        return JsonResponse({'status': True})
     else:
-        return JsonResponse({'status': false})
+        return JsonResponse({'status': False})
 
 def update_star(request, file_name):
     img = Image.objects.get(file_name=file_name)

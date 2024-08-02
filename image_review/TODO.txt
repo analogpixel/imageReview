@@ -1,3 +1,4 @@
 - upload via bookmarklet?  or at least a form where you can paste the url,notes, and tags
 - page to show images with tag (include notes in display)
 - use tags for projects to group images
+- add an (x) on the tags to remove them? hopefully not too easy to accidentally click

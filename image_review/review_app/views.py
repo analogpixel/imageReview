@@ -18,6 +18,32 @@ def serve_image(request, file_name):
     return FileResponse(open(image_path, 'rb'), content_type=content_type)
 
 @csrf_exempt
+def del_tag(request, file_name):
+    if request.method == 'POST':
+        img = Image.objects.get(file_name=file_name)
+        tag_name = request.POST.get('tag')
+        print("removing tag", tag_name)
+        tag = Tag.objects.get(name=tag_name)
+        img.tags.remove(tag)
+        img.save()
+        return JsonResponse({'status': True})
+    else:
+        return JsonResponse({'status': False})
+
+@csrf_exempt
+def add_tag(request, file_name):
+    if request.method == 'POST':
+        img = Image.objects.get(file_name=file_name)
+        tag_name = request.POST.get('tag')
+        print("adding tag", tag_name)
+        tag, _ = Tag.objects.get_or_create(name=tag_name)
+        img.tags.add(tag)
+        img.save()
+        return JsonResponse({'status': True})
+    else:
+        return JsonResponse({'status': False})
+
+@csrf_exempt
 def update_note(request, file_name):
     if request.method == 'POST':
         img = Image.objects.get(file_name=file_name)

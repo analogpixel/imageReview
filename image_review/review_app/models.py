@@ -1,5 +1,14 @@
 from django.db import models
 
+# images for this day
+class Day(models.Model):
+    id   = models.AutoField(primary_key=True)
+    date = models.DateField(unique=True)
+    images = models.ManyToManyField('Image', related_name='days')
+
+    def __str__(self):
+        return str(self.date)
+
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
 

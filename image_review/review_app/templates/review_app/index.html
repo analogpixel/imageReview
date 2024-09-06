@@ -14,7 +14,7 @@
     <div class="container">
       {% for value in images %}
       <div class="card">
-        <img src="/img/{{ value }}">
+        <a href="/img/{{ value }}" target="_"><img src="/img/{{ value }}"></a>
         <div class="tags" data-filename="{{value}}">
           {% for tag in value.tags.all %}
           <div class="tag" data-filename="{{ value }}" data-tag="{{ tag }}">
@@ -25,7 +25,6 @@
         <div class="icons">
           <div class="star" data-filename="{{ value }}">
             <br>
-          {{ value }}
           {% if value.stared %}
           ⭐️ 
           {% else %}

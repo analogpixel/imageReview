@@ -14,7 +14,8 @@ from pathlib import Path,PosixPath
 
 
 # the directory that stores all the images
-IMAGES_DIR = PosixPath("~/imageReview/sample_images").expanduser()
+IMAGES_DIR            = PosixPath("~/s/Inspiration/").expanduser()
+IMAGES_EXTENSIONS     = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

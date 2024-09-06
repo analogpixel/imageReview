@@ -2,3 +2,5 @@
 - page to show images with tag (include notes in display)
 - use tags for projects to group images
 - add an (x) on the tags to remove them? hopefully not too easy to accidentally click
+- ability to delete an image from the database/filesystem
+- ability to view past days; if no day given, show today.

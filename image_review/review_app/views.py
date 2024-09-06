@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Tag,Image
+from .models import Tag,Image,Day
 from django.http import HttpResponse, FileResponse, JsonResponse
 from django.conf import settings
 from .scanfiles import scanfiles
@@ -7,6 +7,7 @@ import mimetypes
 import os
 import random
 from django.views.decorators.csrf import csrf_exempt
+import datetime
 
 def serve_image(request, file_name):
     image_path = os.path.join(settings.IMAGES_DIR, file_name)
@@ -61,15 +62,39 @@ def update_star(request, file_name):
 
 def index(request):
     # https://docs.djangoproject.com/en/5.0/ref/models/querysets/
-    _images = Image.objects.all().order_by("?")
-    images = _images[0:4]
+
+    # search Day for todays date and then return images
+    # if not found create a new Day
+    day = Day.objects.filter(date=datetime.date.today())
+    if not day:
+        print("no day found creating")
+        day = Day(date=datetime.date.today())
+        day.save()
+
+        _images = Image.objects.all().order_by("?")
+        images = _images[0:4]
+        for i in images:
+            print("adding image", i)
+            day.images.add(i)
+    else:
+        print("day found")
+        print(day[0].images)
+        day = day[0]
+
+    images = day.images.all()
+    print("images:", images)
+
     return render(request, 'review_app/index.html', {'images': images})
 
 # reindex all the images
 def rescan(request):
     # add new from fs
     for f in scanfiles(settings.IMAGES_DIR):
-        Image.objects.get_or_create(file_name=f)
+        # if filename has extension in list of extensions settings.IMAGES_EXTENSIONS
+        # then add to db
+        _, ext = os.path.splitext(f)
+        if ext.lower() in settings.IMAGES_EXTENSIONS:
+            Image.objects.get_or_create(file_name=f)
 
     # remove files in db but not fs
 

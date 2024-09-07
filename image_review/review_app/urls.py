@@ -8,7 +8,10 @@ urlpatterns = [
     path('add_tag/<str:file_name>', views.add_tag, name='add_tag'),
     path('del_tag/<str:file_name>', views.del_tag, name='del_tag'),
     path('rescan/', views.rescan, name='rescan'),
+    path('tag/<str:tag_name>', views.tag_page, name='tag'),
+    path('star/', views.star_page, name='star'),
     path('', views.index, name='index'),
+    path('<str:review_date>', views.index, name='index'),
 ]
 
 

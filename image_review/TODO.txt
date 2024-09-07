@@ -4,3 +4,4 @@
 - add an (x) on the tags to remove them? hopefully not too easy to accidentally click
 - ability to delete an image from the database/filesystem
 - ability to view past days; if no day given, show today.
+- update rescan to remove files that no longer exist on fs.

@@ -18,7 +18,7 @@
         <div class="tags" data-filename="{{value}}">
           {% for tag in value.tags.all %}
           <div class="tag" data-filename="{{ value }}" data-tag="{{ tag }}">
-            {{ tag }}
+            <a href="/tag/{{ tag }}">{{ tag }}</a>
           </div>
           {% endfor %}
         </div>
@@ -39,6 +39,9 @@
           <button class="delTag" data-filename="{{ value }}">Del Tag</button>
       </div>
       {% endfor %}
+      <a href="{{ yesterday }}">Previous Day's Review</a> ; 
+      <a href="{{ tomorrow }}">Next Day's Review</a> ;
+      <a href="{{ today }}">Today's Review</a> <br><br>
     </div>
 </body>
 </html>

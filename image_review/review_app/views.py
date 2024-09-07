@@ -60,15 +60,22 @@ def update_star(request, file_name):
     img.save()
     return JsonResponse({'status':img.stared})
 
-def index(request):
+def index(request, review_date=None):
     # https://docs.djangoproject.com/en/5.0/ref/models/querysets/
 
+     
     # search Day for todays date and then return images
     # if not found create a new Day
-    day = Day.objects.filter(date=datetime.date.today())
+    if review_date:
+        current_date = datetime.datetime.strptime(review_date, '%Y-%m-%d')
+    else:
+        current_date = datetime.date.today()
+
+    day = Day.objects.filter(date=current_date)
+
     if not day:
         print("no day found creating")
-        day = Day(date=datetime.date.today())
+        day = Day(date=current_date)
         day.save()
 
         _images = Image.objects.all().order_by("?")
@@ -84,7 +91,22 @@ def index(request):
     images = day.images.all()
     print("images:", images)
 
-    return render(request, 'review_app/index.html', {'images': images})
+    return render(request, 'review_app/index.html', 
+                  {'images': images, 
+                   'yesterday': (current_date - datetime.timedelta(days=1)).strftime('%Y-%m-%d'), 
+                   'tomorrow': (current_date + datetime.timedelta(days=1)).strftime('%Y-%m-%d'),
+                   'today': datetime.date.today().strftime('%Y-%m-%d')}
+                  )
+
+def tag_page(request, tag_name):
+    tag = Tag.objects.get(name=tag_name)
+    # search for all images that have this tag
+    images = Image.objects.filter(tags=tag)
+    return render(request, 'review_app/tag.html', {'images': images, 'tag': tag})
+
+def star_page(request):
+    images = Image.objects.filter(stared=True)
+    return render(request, 'review_app/star.html', {'images': images})
 
 # reindex all the images
 def rescan(request):

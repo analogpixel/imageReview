@@ -1,4 +1,4 @@
-SERVICE_NAME = "view-wise"
+SERVICE_NAME = "view-wise.service"
 
 install_service:
 	@echo "Installing service..."

@@ -1,0 +1,18 @@
+[Unit]
+Description=View Wise Service
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+WorkingDirectory=/imageReview/image_review
+ExecStart=python /imageReview/image_review/manage.py runserver 0.0.0.0:9999
+
+# Environment settings
+#Environment="DJANGO_SETTINGS_MODULE=projectname.settings"
+#Environment="PYTHONPATH=/path/to/your/venv/bin/python"
+#Environment="PATH=/path/to/your/venv/bin:/usr/bin"
+
+[Install]
+WantedBy=multi-user.target
+

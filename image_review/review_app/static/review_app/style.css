@@ -19,6 +19,7 @@ body {
 
 .container {
   width: 85%;
+  max-width: 500px;
 }
 .card {
     background-color: #fff;

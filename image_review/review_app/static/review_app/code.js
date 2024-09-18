@@ -6,7 +6,7 @@ $(document).ready(function() {
       var tag = prompt("Please enter a tag", "");
       $.post('/del_tag/' + $(this).data('filename'), {tag: tag});
       
-      // update tag list
+      // update tag list #TODO fix this to match the new link format
       $('div.tags[data-filename="' + $(this).data('filename')  + '"] span.tag:contains("' + tag + '")').remove();
     });
 
@@ -17,7 +17,7 @@ $(document).ready(function() {
         $.post('/add_tag/' + $(this).data('filename'), {tag: tag});
         
         // update tag list
-        $('div.tags[data-filename="' + $(this).data('filename')  + '"]').append('<span class="tag">' + tag + '</span>');
+        $('div.tags[data-filename="' + $(this).data('filename')  + '"]').append('<span class="tag"><a href=/tag/' + tag + '>' + tag + '</a></span>');
       }
     });
 

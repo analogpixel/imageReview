@@ -22,7 +22,7 @@ def serve_image(request, file_name):
 def del_tag(request, file_name):
     if request.method == 'POST':
         img = Image.objects.get(file_name=file_name)
-        tag_name = request.POST.get('tag')
+        tag_name = request.POST.get('tag').strip().lower()
         print("removing tag", tag_name)
         tag = Tag.objects.get(name=tag_name)
         img.tags.remove(tag)
@@ -35,7 +35,7 @@ def del_tag(request, file_name):
 def add_tag(request, file_name):
     if request.method == 'POST':
         img = Image.objects.get(file_name=file_name)
-        tag_name = request.POST.get('tag')
+        tag_name = request.POST.get('tag').strip().lower()
         print("adding tag", tag_name)
         tag, _ = Tag.objects.get_or_create(name=tag_name)
         img.tags.add(tag)

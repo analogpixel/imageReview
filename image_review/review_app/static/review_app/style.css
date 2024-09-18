@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-    width: 450px;
+  width: 85%;
 }
 .card {
     background-color: #fff;
@@ -57,8 +57,9 @@ body {
     color: #fff;
 }
 .card img {
-    width: 400px;
+    width: 100%;
     margin-right: 10px;
+    padding-bottom: 5px;
     vertical-align: middle;
 }
 .card .tag {
